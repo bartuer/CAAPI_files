@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "docker" do |d|
     d.build_dir = "."
     d.has_ssh = true
-    d.volumes = ["/ml:/ml"]
+    d.volumes = ["/ml:/ml", "codevol:/ml/storage/code", "datavol:/ml/storage/data"]
   end
   config.ssh.port = 22
   #
