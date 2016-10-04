@@ -19,7 +19,7 @@ Get access to the running docker instance via ssh as user vagrant.
 
 
 | host      | container |
-|-----------+-----------|
+|-----------|:---------:|
 | /ml/local | /ml/local |
 
 
@@ -27,7 +27,7 @@ Get access to the running docker instance via ssh as user vagrant.
 
 
 | azure                  | container   |
-|------------------------+-------------|
+|------------------------|:-----------:|
 | Azure File Storage url | /ml/storage |
 
 
