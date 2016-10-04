@@ -17,18 +17,18 @@ Get access to the running docker instance via ssh as user vagrant.
 
 ## Host volume mapping
 
-|-----------+-----------|
+
 | host      | container |
 |-----------+-----------|
 | /ml/local | /ml/local |
-|-----------+-----------|
+
 
 ## Azure storage file volume mount
 
-|------------------------+-------------|
+
 | azure                  | container   |
 |------------------------+-------------|
 | Azure File Storage url | /ml/storage |
-|------------------------+-------------|
+
 
 
