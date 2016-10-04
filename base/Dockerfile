@@ -31,7 +31,7 @@ RUN chmod 0755 /var/run/sshd
 
 # Create and configure vagrant user
 RUN useradd --create-home -s /bin/bash vagrant
-RUN usermode -aG root vagrant
+RUN usermod -aG root vagrant
 WORKDIR /home/vagrant
 
 # Configure SSH access
