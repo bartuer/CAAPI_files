@@ -16,7 +16,7 @@ CMD ["/sbin/my_init"]
 
 RUN apt-get update
 
-RUN apt-get install -y openssh-server wget lsb-release sudo
+RUN apt-get install -y openssh-server wget lsb-release git sudo
 RUN \
     export release=`lsb_release -cs` \
     && wget http://apt.puppetlabs.com/puppetlabs-release-$release.deb -O puppetlabs-release-$release.deb \
@@ -31,6 +31,7 @@ RUN chmod 0755 /var/run/sshd
 
 # Create and configure vagrant user
 RUN useradd --create-home -s /bin/bash vagrant
+RUN usermode -aG root vagrant
 WORKDIR /home/vagrant
 
 # Configure SSH access
@@ -44,9 +45,9 @@ RUN mkdir -p /etc/sudoers.d
 RUN install -b -m 0440 /dev/null /etc/sudoers.d/vagrant
 RUN echo 'vagrant ALL=NOPASSWD: ALL' >> /etc/sudoers.d/vagrant
 
-# VOLUME /vagrant_data
-# RUN touch /vagrant_data/x
-# RUN chown -R vagrant:vagrant /vagrant_data
+VOLUME /ml
+RUN touch /ml/x && rm /ml/x
+RUN chown -R root:root /ml
 
 # Clean up APT when done.
 
