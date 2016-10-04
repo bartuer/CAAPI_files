@@ -4,4 +4,4 @@ cd /ml
 sudo git clone https://github.com/bartuer/CAAPI_files.git vms
 sudo chown -R $(whoami):root /ml/vms
 cd /ml/vms/base
-vagrant reload
+vagrant up
