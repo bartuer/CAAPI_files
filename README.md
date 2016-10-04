@@ -4,6 +4,7 @@ These are vagrant systems with docker provider, basic usage like check
 out Vagrantfile and Dockerfile then:
 
 ```shell
+cd $vm_folder
 vagrant reload
 ```
 
@@ -23,7 +24,7 @@ Get access to the running docker instance via ssh as user vagrant.
 | /ml/local | /ml/local |
 
 
-## Azure storage file volume mount
+## Azure storage file volume mapping
 
 
 | azure                  | container   |
