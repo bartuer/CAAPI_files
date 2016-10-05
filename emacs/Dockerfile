@@ -48,7 +48,7 @@ RUN curl -o node-${VERSION}.tar.gz -sSL https://nodejs.org/dist/${VERSION}/node-
     make install && \
     paxctl -cm /usr/bin/node && \
     cd / && \
-    rm -rf /etc/ssl /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
+    rm -rf /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
     /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
     /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
 
