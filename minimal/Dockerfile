@@ -13,8 +13,7 @@ RUN apk update && \
     chown -R vagrant: /home/vagrant/.ssh && \
     echo -n 'vagrant:vagrant' | chpasswd && \
     echo 'vagrant ALL=NOPASSWD: ALL' >> /etc/sudoers && \
-    touch /ml/x && rm /ml/x && \
-    chown -R root:root /ml && \
+    mkdir -p /ml && touch /ml/x && rm /ml/x && chown -R vagrant:vagrant /ml
 
 EXPOSE 2222
 
