@@ -3,7 +3,7 @@ FROM alpine:latest
 MAINTAINER Bartuer Zhou <bartuer@bartuer.com>
 
 RUN apk update && \
-    apk add --no-cache bash git curl ncurses-dev aspell aspell-en luajit python ruby sqlite openssh rsync sudo vim coreutils && \
+    apk add --no-cache bash openssh sudo coreutils && \
     mkdir -p ~root/.ssh && chmod 700 ~root/.ssh/ && \
     echo -e "Port 22\n" >> /etc/ssh/sshd_config && \
     cp -a /etc/ssh /etc/ssh.cache && \
