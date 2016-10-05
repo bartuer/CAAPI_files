@@ -48,10 +48,6 @@ RUN curl -o node-${VERSION}.tar.gz -sSL https://nodejs.org/dist/${VERSION}/node-
     make install && \
     paxctl -cm /usr/bin/node && \
     cd / && \
-    if [ -x /usr/bin/npm ]; then \
-      npm install -g npm@${NPM_VERSION} && \
-      find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
-    fi && \
     rm -rf /etc/ssl /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
     /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
     /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
@@ -72,11 +68,6 @@ RUN mkdir -p /home/vagrant/etc && \
     mkdir -p /home/vagrant/local/share && \
     cp -r /usr/share/emacs /home/vagrant/local/share/ && \
     ln -s /home/vagrant/local/share/emacs/25.0.50 /home/vagrant/local/share/emacs/current && \
-    if [ -x /usr/bin/npm ]; then \
-      cd /home/vagrant/etc/el/vendor && npm install 
-    else \
-      echo "cd ~/etc/el/vendor && tar zcf - node_modules | ssh -p 2222 vagrant@localhost 'cd ~/etc/el/vendor; tar zxf -'"
-    fi && \
     ln -s /home/vagrant/etc/el/.emacs.el /home/vagrant/.emacs.el && \
     cat /home/vagrant/etc/el/install/bashrc_alpine.sh >> /home/vagrant/.bashrc && \
     chown vagrant:vagrant -R /home/vagrant
