@@ -3,8 +3,9 @@ FROM alpine:latest
 MAINTAINER Bartuer Zhou <bartuer@bartuer.com>
 
 RUN apk update && \
-    apk add --no-cache bash git openssh rsync sudo vim coreutils && \
-    mkdir -p ~root/.ssh && chmod 700 ~root/.ssh/ && \
+    apk add --no-cache bash git openssh rsync sudo vim coreutils
+
+RUN mkdir -p ~root/.ssh && chmod 700 ~root/.ssh/ && \
     echo -e "Port 22\n" >> /etc/ssh/sshd_config && \
     cp -a /etc/ssh /etc/ssh.cache && \
     rm -rf /var/cache/apk/* && \
