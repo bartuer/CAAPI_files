@@ -70,7 +70,8 @@ RUN mkdir -p /home/vagrant/etc && \
     ln -s /home/vagrant/local/share/emacs/25.0.50 /home/vagrant/local/share/emacs/current && \
     ln -s /home/vagrant/etc/el/.emacs.el /home/vagrant/.emacs.el && \
     cat /home/vagrant/etc/el/install/bashrc_alpine.sh >> /home/vagrant/.bashrc && \
-    chown vagrant:vagrant -R /home/vagrant
+    chown vagrant:vagrant -R /home/vagrant && \
+    rm -rf /home/vagrant/etc/el/.git
     
 WORKDIR /home/vagrant
 VOLUME /ml
