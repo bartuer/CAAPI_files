@@ -32,25 +32,6 @@ RUN curl --silent \
     --location https://github.com/sgerrand/alpine-pkg-R/releases/download/v3.2.3-r0/R-doc-3.2.3-r0.apk --output /var/cache/apk/R-doc-3.2.3-r0.apk \
     && apk add --allow-untrusted  /var/cache/apk/R-3.2.3-r0.apk  /var/cache/apk/R-dev-3.2.3-r0.apk  /var/cache/apk/R-doc-3.2.3-r0.apk 
 
-# Compile & Install NodeJS
-ENV VERSION=v6.7.0 NPM_VERSION=3 CFLAGS="-D__USE_MISC" NPM_VERSION=2
-ENV CONFIG_FLAGS="--without-npm" RM_DIRS=/usr/include
-
-RUN curl -o node-${VERSION}.tar.gz -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz && \
-    tar -zxf node-${VERSION}.tar.gz && \
-    cd node-${VERSION} && \
-    export GYP_DEFINES="linux_use_gold_flags=0" && \
-    ./configure --prefix=/usr ${CONFIG_FLAGS} && \
-    NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
-    make -j${NPROC} -C out mksnapshot BUILDTYPE=Release && \
-    paxctl -cm out/Release/mksnapshot && \
-    make -j${NPROC} && \
-    make install && \
-    paxctl -cm /usr/bin/node && \
-    cd / && \
-    rm -rf /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
-    /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
-    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
 
 # Compile & Install Emacs
 RUN mkdir -p /home/vagrant/etc && \
@@ -72,6 +53,26 @@ RUN mkdir -p /home/vagrant/etc && \
     cat /home/vagrant/etc/el/install/bashrc_alpine.sh >> /home/vagrant/.bashrc && \
     chown vagrant:vagrant -R /home/vagrant && \
     rm -rf /home/vagrant/etc/el/.git
+
+# Compile & Install NodeJS
+ENV VERSION=v6.7.0 NPM_VERSION=3 CFLAGS="-D__USE_MISC" NPM_VERSION=2
+ENV CONFIG_FLAGS="--without-npm" RM_DIRS=/usr/include
+
+RUN curl -o node-${VERSION}.tar.gz -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz && \
+    tar -zxf node-${VERSION}.tar.gz && \
+    cd node-${VERSION} && \
+    export GYP_DEFINES="linux_use_gold_flags=0" && \
+    ./configure --prefix=/usr ${CONFIG_FLAGS} && \
+    NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
+    make -j${NPROC} -C out mksnapshot BUILDTYPE=Release && \
+    paxctl -cm out/Release/mksnapshot && \
+    make -j${NPROC} && \
+    make install && \
+    paxctl -cm /usr/bin/node && \
+    cd / && \
+    rm -rf /node-${VERSION}.tar.gz /SHASUMS256.txt.asc /node-${VERSION} ${RM_DIRS} \
+    /usr/share/man /tmp/* /var/cache/apk/* /root/.npm /root/.node-gyp /root/.gnupg \
+    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html
     
 WORKDIR /home/vagrant
 VOLUME /ml
