@@ -4,7 +4,9 @@ MAINTAINER Bartuer Zhou <bartuer@bartuer.com>
 
 # SSH
 RUN apk update && \
-    apk add --no-cache ca-certificates bash gcc g++ git linux-headers paxctl libgcc libstdc++ gnupg curl ncurses-dev aspell aspell-en luajit python ruby sqlite openssh rsync sudo vim coreutils make && \
+    apk add --no-cache ca-certificates bash gcc g++ git linux-headers paxctl libgcc libstdc++ gnupg \
+    curl ncurses-dev aspell aspell-en luajit python ruby sqlite openssh rsync sudo vim coreutils make && \
+    apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community/ shadow  && \
     mkdir -p ~root/.ssh && chmod 700 ~root/.ssh/ && \
     echo -e "Port 22\n" >> /etc/ssh/sshd_config && \
     cp -a /etc/ssh /etc/ssh.cache && \
