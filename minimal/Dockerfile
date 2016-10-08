@@ -1,1 +1,1 @@
-FROM cappi/minimal
+FROM caapi/minimal
