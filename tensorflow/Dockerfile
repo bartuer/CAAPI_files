@@ -1,2 +1,2 @@
-FROM tensorflow/tensorflow
+FROM gcr.io/tensorflow/tensorflow
 
