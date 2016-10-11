@@ -1,0 +1,1 @@
+docker run -d -v codevol:/ml/storage/code caapi/flower:latest
