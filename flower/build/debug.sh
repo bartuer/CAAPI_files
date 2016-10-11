@@ -1,1 +1,1 @@
-docker run -it -v codevol:/ml/storage/code caapi/flower:latest sh
+docker run --rm  -it -v codevol:/ml/storage/code caapi/flower:latest sh
