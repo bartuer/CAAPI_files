@@ -9,8 +9,14 @@ RUN apt-get update && \
     libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev \
     libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler \
     libgflags-dev libgoogle-glog-dev liblmdb-dev \
-    python-dev python-pip  && \
-    apt-get install -y --no-install-recommends libboost-all-dev 
+    python-dev python-pip \
+    cython python-numpy python-scipy \
+    python-skimage python-matplotlib ipython python-h5py \
+    python-leveldb python-networkx python-nose python-pandas \
+    python-dateutil python-protobuf \
+    python-gflags python-yaml python-pil && pip install flask && \
+    apt-get install -y --no-install-recommends libboost-all-dev  && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/tar/opencv-3.0.0/release
 
@@ -24,13 +30,6 @@ RUN NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
     make -j${NPROC} && make install
 
 WORKDIR /opt/tar/caffe
-
-RUN apt-get install -y cython python-numpy python-scipy \
-    python-skimage python-matplotlib ipython python-h5py \
-    python-leveldb python-networkx python-nose python-pandas \
-    python-dateutil python-protobuf \
-    python-gflags python-yaml python-pil && pip install flask &&\
-    rm -rf /var/lib/apt/lists/*
 
 RUN NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
     make -j${NPROC} && \
