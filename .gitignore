@@ -1,3 +1,4 @@
 .vagrant
 flower/build/tar
 /flower/build/flower.latest.tar.gz
+flower/build/caffe
